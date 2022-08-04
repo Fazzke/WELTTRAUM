@@ -1,6 +1,6 @@
 extends RigidBody
 export var rotation_speed := 8.0
-
+#lalal
 var _move_direction := Vector3.ZERO
 var _last_strong_direction := Vector3.FORWARD
 var local_gravity := Vector3.DOWN
