@@ -2,15 +2,17 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rust_coarse_01_nor_gl_4k.jpg-78f62453c5a9d6fe68de2a0a3c2b7a10.stex"
+path.s3tc="res://.import/rust_coarse_01_nor_gl_4k.jpg-78f62453c5a9d6fe68de2a0a3c2b7a10.s3tc.stex"
+path.etc2="res://.import/rust_coarse_01_nor_gl_4k.jpg-78f62453c5a9d6fe68de2a0a3c2b7a10.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/rust_coarse_01_4k.gltf/textures/rust_coarse_01_nor_gl_4k.jpg"
-dest_files=[ "res://.import/rust_coarse_01_nor_gl_4k.jpg-78f62453c5a9d6fe68de2a0a3c2b7a10.stex" ]
+dest_files=[ "res://.import/rust_coarse_01_nor_gl_4k.jpg-78f62453c5a9d6fe68de2a0a3c2b7a10.s3tc.stex", "res://.import/rust_coarse_01_nor_gl_4k.jpg-78f62453c5a9d6fe68de2a0a3c2b7a10.etc2.stex" ]
 
 [params]
 
