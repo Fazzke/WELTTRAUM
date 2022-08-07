@@ -102,8 +102,8 @@ shape = SubResource( 4 )
 visible = false
 mesh = SubResource( 5 )
 
-[node name="Camera" type="Camera" parent="RigidBodyPlayer"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.84316, 1.02212, 10.1122 )
+[node name="Position3D" type="Position3D" parent="RigidBodyPlayer"]
+transform = Transform( 1, 0, 0, 0, 0.986689, 0.16262, 0, -0.16262, 0.986689, 0, 4.85271, 16.6565 )
 
 [node name="aerial_rocks" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 59.0544, 5.36449, -72.6168 )
@@ -125,3 +125,8 @@ environment = SubResource( 11 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.790903, 1.17854e-08, 0.611941, -0.270195, 0.897243, 0.349213, -0.54906, -0.441537, 0.709632, 40.422, 21.4677, 40.7588 )
+
+[node name="Camera" type="InterpolatedCamera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.222479, 13.2758, 21.8153 )
+target = NodePath("../RigidBodyPlayer/Position3D")
+enabled = true
