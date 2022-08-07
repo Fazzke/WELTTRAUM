@@ -42,16 +42,16 @@ func _walk_around_planet(state):
 func _move():
 	#handles all input and logic related to character movement
 	#move
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("ui_down"):
 		add_central_force(move_force * global_transform.basis.z)
 		
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("ui_up"):
 		add_central_force(move_force * -global_transform.basis.z)
 
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_right"):
 		add_central_force(move_force * global_transform.basis.x)
 
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_left"):
 		add_central_force(move_force * -global_transform.basis.x)
 	
 	#jump:
