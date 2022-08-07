@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
+
 [ext_resource path="res://RigidBodyPlayer.gd" type="Script" id=1]
 [ext_resource path="res://textur planet stein.jpg" type="Texture" id=2]
-[ext_resource path="res://KinematicBodyPlayer.gd" type="Script" id=3]
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -17,10 +17,6 @@ radius = 20.174
 [sub_resource type="CapsuleShape" id=4]
 
 [sub_resource type="CapsuleMesh" id=5]
-
-[sub_resource type="SphereShape" id=6]
-
-[sub_resource type="SphereMesh" id=7]
 
 [node name="Weltraum" type="Spatial"]
 
@@ -43,6 +39,26 @@ gravity = 17.516
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody/Area"]
 shape = SubResource( 3 )
 
+[node name="StaticBody2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.8448, 8.98438, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
+transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+shape = SubResource( 2 )
+
+[node name="Area" type="Area" parent="StaticBody2"]
+space_override = 3
+gravity_point = true
+gravity_vec = Vector3( 0, 0, 0 )
+gravity = 17.516
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2/Area"]
+shape = SubResource( 3 )
+
 [node name="RigidBodyPlayer" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.29573, 0 )
 mode = 2
@@ -59,22 +75,3 @@ mesh = SubResource( 5 )
 
 [node name="Camera" type="Camera" parent="RigidBodyPlayer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.84316, 1.02212, 10.1122 )
-
-[node name="KinematicBodyPlayer" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.6173, -9.52557 )
-visible = false
-script = ExtResource( 2 )
-
-[node name="CollisionShape" type="CollisionShape" parent="KinematicBodyPlayer"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.49767 )
-visible = false
-shape = SubResource( 6 )
-
-[node name="MeshInstance" type="MeshInstance" parent="KinematicBodyPlayer"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.48647 )
-visible = false
-mesh = SubResource( 7 )
-
-[node name="Position3D" type="Position3D" parent="KinematicBodyPlayer"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.126869, -3.37232, 9.53622 )
-visible = false
