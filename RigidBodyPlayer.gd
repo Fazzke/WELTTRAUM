@@ -1,19 +1,20 @@
 extends RigidBody
 
 onready var planet = get_node("/root/Weltraum/StaticBody")
+onready var planet2 = get_node("/root/Weltraum/StaticBody2")
 var gravity_direction = Vector3();
 var move_force = 15
 var jump_force = 10
-#planets will set this value for you (check the planet script)
-var planet_name = "space"
+
+var planet_name = "planet1"
 
 func _ready():
-	_calc_gravity_direction("planet_earth", planet)
+	_calc_gravity_direction("planet2", planet)
 
 
 func _process(delta):
 		
-	if planet_name == "space":
+	if planet_name == "planet1":
 		_calc_gravity_direction(planet_name, planet)
 	
 	_move()
