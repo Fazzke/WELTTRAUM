@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
+
 [ext_resource path="res://RigidBodyPlayer.gd" type="Script" id=1]
 [ext_resource path="res://textur planet stein.jpg" type="Texture" id=2]
-[ext_resource path="res://KinematicBodyPlayer.gd" type="Script" id=3]
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -17,8 +17,6 @@ radius = 20.174
 [sub_resource type="CapsuleShape" id=4]
 
 [sub_resource type="CapsuleMesh" id=5]
-
-[sub_resource type="SphereShape" id=6]
 
 [sub_resource type="SphereMesh" id=7]
 
@@ -68,7 +66,6 @@ script = ExtResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBodyPlayer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.49767 )
 visible = false
-shape = SubResource( 6 )
 
 [node name="MeshInstance" type="MeshInstance" parent="KinematicBodyPlayer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.48647 )
