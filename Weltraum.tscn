@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://RigidBodyPlayer.gd" type="Script" id=1]
+[ext_resource path="res://KinematicBodyPlayer.gd" type="Script" id=2]
 
 [sub_resource type="SphereMesh" id=1]
 
@@ -8,11 +9,15 @@
 radius = 6.0
 
 [sub_resource type="SphereShape" id=3]
-radius = 11.0
+radius = 20.174
 
 [sub_resource type="CapsuleShape" id=4]
 
 [sub_resource type="CapsuleMesh" id=5]
+
+[sub_resource type="SphereShape" id=6]
+
+[sub_resource type="SphereMesh" id=7]
 
 [node name="Weltraum" type="Spatial"]
 
@@ -21,7 +26,6 @@ radius = 11.0
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
 transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0 )
 mesh = SubResource( 1 )
-material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 shape = SubResource( 2 )
@@ -30,7 +34,7 @@ shape = SubResource( 2 )
 space_override = 3
 gravity_point = true
 gravity_vec = Vector3( 0, 0, 0 )
-gravity = 8.055
+gravity = 17.516
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody/Area"]
 shape = SubResource( 3 )
@@ -48,7 +52,25 @@ shape = SubResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RigidBodyPlayer"]
 mesh = SubResource( 5 )
-material/0 = null
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.479665, 5.41143, 21.1673 )
+[node name="Camera" type="Camera" parent="RigidBodyPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.84316, 1.02212, 10.1122 )
+
+[node name="KinematicBodyPlayer" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.6173, -9.52557 )
+visible = false
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBodyPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.49767 )
+visible = false
+shape = SubResource( 6 )
+
+[node name="MeshInstance" type="MeshInstance" parent="KinematicBodyPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.48647 )
+visible = false
+mesh = SubResource( 7 )
+
+[node name="Position3D" type="Position3D" parent="KinematicBodyPlayer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.126869, -3.37232, 9.53622 )
+visible = false
