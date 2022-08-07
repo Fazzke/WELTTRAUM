@@ -1,32 +1,38 @@
 extends RigidBody
 
-onready var planet = get_node("/root/Weltraum/StaticBody")
+onready var planet1 = get_node("/root/Weltraum/StaticBody")
 onready var planet2 = get_node("/root/Weltraum/StaticBody2")
 var gravity_direction = Vector3();
 var move_force = 15
 var jump_force = 10
-
-var planet_name = "planet1"
+var current_planet = null
 
 func _ready():
-	_calc_gravity_direction("planet2", planet)
-
+	current_planet = planet1
+	_calc_gravity_direction(current_planet)
 
 func _process(delta):
-		
-	if planet_name == "planet1":
-		_calc_gravity_direction(planet_name, planet)
-	
+	_calc_gravity_direction(current_planet)
+	_calc_nearest_planet(planet1, planet2)
 	_move()
+
+func _calc_nearest_planet(planet1, planet2):
+	#Sind die Begrenzungspunkte der Strecke P1(x1, y1, z1) und P2(x2,y2,z2), dann gilt für die Länge s der Strecke:
+	#s2 = (x2-x1)2+(y2-y1)2+(z2-z1)2
+	var planet1_to_player_distance = abs(((planet1.transform.origin.x - transform.origin.x) * 2) + ((planet1.transform.origin.y - transform.origin.y) * 2) + ((planet1.transform.origin.z - transform.origin.z) * 2) * 1.0000)
+	var planet2_to_player_distance = abs(((planet2.transform.origin.x - transform.origin.x) * 2) + ((planet2.transform.origin.y - transform.origin.y) * 2) + ((planet2.transform.origin.z - transform.origin.z) * 2) * 1.0000)
 	
+	if planet1_to_player_distance >= planet2_to_player_distance:
+		current_planet = planet2
+	else:
+		current_planet = planet1
 	
 func _integrate_forces(state):
 	_walk_around_planet(state)
 	
 
-func _calc_gravity_direction(planet_name, planet_node):
+func _calc_gravity_direction(planet_node):
 	gravity_direction = (planet_node.transform.origin - transform.origin).normalized()
-	print(gravity_direction)
 
 func _walk_around_planet(state):
 	# allign the players y-axis (up and down) with the planet's gravity direciton:
@@ -51,10 +57,6 @@ func _move():
 	#jump:
 	if Input.is_action_just_pressed("ui_space"):
 		apply_impulse(Vector3.UP, jump_force * global_transform.basis.y)
-
-func set_planet_name(n):
-	print ("setting new planet: ", n)
-	planet_name = n
 	
 #export var rotation_speed := 8.0
 ###lalal
