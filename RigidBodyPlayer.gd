@@ -3,7 +3,7 @@ extends RigidBody
 onready var planet1 = get_node("/root/Weltraum/StaticBody")
 onready var planet2 = get_node("/root/Weltraum/StaticBody2")
 var gravity_direction = Vector3();
-var move_force = 15
+var move_force = 8
 var jump_force = 10
 var current_planet = null
 
