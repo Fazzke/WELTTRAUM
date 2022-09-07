@@ -1,37 +1,42 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://RigidBodyPlayer.gd" type="Script" id=1]
 [ext_resource path="res://textur planet stein.jpg" type="Texture" id=2]
 [ext_resource path="res://textures/aerial_rocks_02_4k.gltf/aerial_rocks_02.material" type="Material" id=3]
-[ext_resource path="res://textures/polystyrene_4k.gltf/textures/polystyrene_diff_4k.jpg" type="Texture" id=4]
+[ext_resource path="res://textures/rust_coarse_01_4k.gltf/rust_coarse_01.material" type="Material" id=4]
 [ext_resource path="res://textures/aerial_rocks_02_4k.gltf/aerial_rocks_02_4k.gltf" type="PackedScene" id=5]
 [ext_resource path="res://textures/Weltraum darkgeschnitten mit josi.png" type="Texture" id=6]
 [ext_resource path="res://3D Modelle/xian_spaceship/scene.gltf" type="PackedScene" id=7]
-[ext_resource path="res://3D Modelle/capsule_corporation_spaceship_-_low_poly_-_free/scene.gltf" type="PackedScene" id=8]
+[ext_resource path="res://textures/polystyrene_4k.gltf/polystyrene.material" type="Material" id=8]
+[ext_resource path="res://StaticBody.gd" type="Script" id=9]
+[ext_resource path="res://StaticBody2.gd" type="Script" id=10]
+[ext_resource path="res://StaticBody3.gd" type="Script" id=11]
+[ext_resource path="res://CentralStar.gd" type="Script" id=13]
 
 [sub_resource type="SphereMesh" id=1]
 
-[sub_resource type="SpatialMaterial" id=6]
-albedo_texture = ExtResource( 2 )
-
 [sub_resource type="SphereShape" id=2]
-radius = 6.0
+radius = 6.05374
 
 [sub_resource type="SphereShape" id=3]
 radius = 20.174
 
-[sub_resource type="SphereMesh" id=12]
-
-[sub_resource type="SpatialMaterial" id=13]
-albedo_texture = ExtResource( 4 )
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.470588, 0.152941, 0.815686, 1 )
+albedo_texture = ExtResource( 2 )
 
 [sub_resource type="CapsuleShape" id=4]
 
 [sub_resource type="CapsuleMesh" id=5]
 
+[sub_resource type="GDScript" id=16]
+
 [sub_resource type="SphereMesh" id=7]
 
 [sub_resource type="SphereShape" id=8]
+
+[sub_resource type="SphereShape" id=15]
+radius = 150.0
 
 [sub_resource type="PanoramaSky" id=10]
 panorama = ExtResource( 6 )
@@ -43,11 +48,15 @@ background_sky = SubResource( 10 )
 [node name="Weltraum" type="Spatial"]
 
 [node name="StaticBody" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 86.9497, -64.7351, -91.5756 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 9 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
 transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0 )
 mesh = SubResource( 1 )
-material/0 = SubResource( 6 )
+material/0 = ExtResource( 8 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
 shape = SubResource( 2 )
@@ -62,10 +71,15 @@ gravity = 17.516
 shape = SubResource( 3 )
 
 [node name="StaticBody2" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.8104, 1.66904, -8.69559 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 21.755, -8.45248, 0 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 10 )
 
-[node name="Station" parent="StaticBody2" instance=ExtResource( 8 )]
-transform = Transform( 0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0.0335751, 6.26823, 0.0906963 )
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
+transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
 shape = SubResource( 2 )
@@ -79,13 +93,33 @@ gravity = 17.516
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody2/Area"]
 shape = SubResource( 3 )
 
-[node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
+[node name="StaticBody3" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.3517, 6.69968, -21.6193 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 11 )
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody3"]
 transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0 )
-mesh = SubResource( 12 )
-material/0 = SubResource( 13 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody3"]
+shape = SubResource( 2 )
+
+[node name="Area" type="Area" parent="StaticBody3"]
+space_override = 3
+gravity_point = true
+gravity_vec = Vector3( 0, 0, 0 )
+gravity = 17.516
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody3/Area"]
+shape = SubResource( 3 )
 
 [node name="RigidBodyPlayer" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.29573, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58.2891, 51.0872, 0 )
+collision_layer = 3
+collision_mask = 3
 mode = 2
 contacts_reported = 1
 contact_monitor = true
@@ -107,6 +141,7 @@ transform = Transform( 1, 0, 0, 0, 0.986689, 0.16262, 0, -0.16262, 0.986689, 0, 
 
 [node name="aerial_rocks" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 59.0544, 5.36449, -72.6168 )
+script = SubResource( 16 )
 
 [node name="MeshInstance" type="MeshInstance" parent="aerial_rocks"]
 transform = Transform( 22, 0, 0, 0, 22, 0, 0, 0, 22, 0, 0, 0 )
@@ -115,10 +150,17 @@ mesh = SubResource( 7 )
 material/0 = ExtResource( 3 )
 
 [node name="RigidBody" type="StaticBody" parent="aerial_rocks"]
+script = ExtResource( 13 )
 
 [node name="CollisionShape" type="CollisionShape" parent="aerial_rocks/RigidBody"]
 transform = Transform( 25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0 )
 shape = SubResource( 8 )
+
+[node name="Area" type="Area" parent="aerial_rocks/RigidBody"]
+
+[node name="CollisionShape" type="CollisionShape" parent="aerial_rocks/RigidBody/Area"]
+shape = SubResource( 15 )
+disabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 11 )
@@ -127,6 +169,13 @@ environment = SubResource( 11 )
 transform = Transform( 0.790903, 1.17854e-08, 0.611941, -0.270195, 0.897243, 0.349213, -0.54906, -0.441537, 0.709632, 40.422, 21.4677, 40.7588 )
 
 [node name="Camera" type="InterpolatedCamera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.222479, 13.2758, 21.8153 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 58.2861, 51.3588, 21.8153 )
 target = NodePath("../RigidBodyPlayer/Position3D")
 enabled = true
+
+[connection signal="body_entered" from="StaticBody/Area" to="RigidBodyPlayer" method="_on_Area_body_entered"]
+[connection signal="body_exited" from="StaticBody/Area" to="RigidBodyPlayer" method="_on_Area_body_exited"]
+[connection signal="body_entered" from="StaticBody2/Area" to="RigidBodyPlayer" method="_on_Area_body_entered"]
+[connection signal="body_exited" from="StaticBody2/Area" to="RigidBodyPlayer" method="_on_Area_body_exited"]
+[connection signal="body_entered" from="StaticBody3/Area" to="RigidBodyPlayer" method="_on_Area_body_entered"]
+[connection signal="body_exited" from="StaticBody3/Area" to="RigidBodyPlayer" method="_on_Area_body_exited"]
