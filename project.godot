@@ -11,12 +11,12 @@ config_version=4
 [application]
 
 config/name="Weltall 3D Kugeln"
-run/main_scene="res://Weltraum.tscn"
+run/main_scene="res://scenes/Game.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Hud="*res://scenes/HUD.tscn"
+Game="*res://scenes/Game.tscn"
 
 [global]
 
