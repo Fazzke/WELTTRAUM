@@ -1,6 +1,6 @@
 extends RigidBody
 
-onready var centralStar = get_node("/root/Weltraum/aerial_rocks/RigidBody")
+onready var centralStar = get_node("/root/Weltraum/Central/CentralBody")
 onready var planet1 = get_node("/root/Weltraum/StaticBody")
 onready var planet2 = get_node("/root/Weltraum/StaticBody2")
 onready var planet3 = get_node("/root/Weltraum/StaticBody3")
@@ -11,10 +11,15 @@ var jump_force = 40
 var current_planet = null
 var can_jump = false
 
+var game_control = preload("res://scenes/GameOverScreen.tscn")
+var game_control_instance = null
+
 func _ready():
 	planets = [planet1, planet2, planet3]
 	current_planet = centralStar
 	_calc_gravity_direction(current_planet)
+	
+	game_control_instance = game_control.instance()
 
 func _process(delta):
 	_calc_gravity_direction(current_planet)
@@ -58,6 +63,8 @@ func _check_if_central_star():
 		
 func prevent_player_from_falling():
 	if current_planet == centralStar:
+		#pass
+		#TO-DO: make this good
 		set_linear_velocity(Vector3(0, 0, 0))
 	else:
 		set_linear_velocity(gravity_direction * 10)
@@ -105,3 +112,8 @@ func _on_PlanetGroundArea_body_entered(body):
 func _on_PlanetGroundArea_body_exited(body):
 	#_check_if_can_jump()
 	pass
+
+
+func _on_CentralBodyArea_body_entered(body):
+	print("CentralBodyArea_body_entered")
+	add_child(game_control_instance)

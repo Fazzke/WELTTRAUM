@@ -7,3 +7,7 @@ func _ready():
 #func _process(delta):
 #	pass
 
+func change_to_end_screen():
+	get_tree().change_scene("res://scenes/GameOverScreen.tscn")
+	pass
+
