@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scripts/RigidBodyPlayer.gd" type="Script" id=1]
 [ext_resource path="res://scripts/StaticBody.gd" type="Script" id=2]
@@ -6,7 +6,9 @@
 [ext_resource path="res://scripts/StaticBody2.gd" type="Script" id=4]
 [ext_resource path="res://textur planet stein.jpg" type="Texture" id=5]
 [ext_resource path="res://textures/Weltraum darkgeschnitten mit josi.png" type="Texture" id=6]
+[ext_resource path="res://3D Modelle/moon/textures/Material.001_baseColor.jpeg" type="Texture" id=7]
 [ext_resource path="res://3D Modelle/xian_spaceship/scene.gltf" type="PackedScene" id=8]
+[ext_resource path="res://3D Modelle/kugelbot/scene.gltf" type="PackedScene" id=9]
 [ext_resource path="res://textures/rust_coarse_01_4k.gltf/rust_coarse_01.material" type="Material" id=11]
 [ext_resource path="res://textures/polystyrene_4k.gltf/polystyrene.material" type="Material" id=12]
 [ext_resource path="res://black.png" type="Texture" id=13]
@@ -60,10 +62,15 @@ albedo_texture = ExtResource( 13 )
 [sub_resource type="SphereShape" id=24]
 radius = 9.294
 
+[sub_resource type="SphereMesh" id=25]
+
+[sub_resource type="SpatialMaterial" id=26]
+albedo_texture = ExtResource( 7 )
+
 [node name="Weltraum" type="Spatial"]
 
 [node name="StaticBody" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69.457, 6.675, -17.472 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 10, 0 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 2 )
@@ -91,7 +98,7 @@ shape = SubResource( 3 )
 shape = SubResource( 16 )
 
 [node name="StaticBody2" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 76.1126, 19.3979, 43.005 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.16941, 10, 96.3612 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 4 )
@@ -119,7 +126,7 @@ shape = SubResource( 3 )
 shape = SubResource( 17 )
 
 [node name="StaticBody3" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 66.6823, 6.69968, 15.2219 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1664, 10, 140.927 )
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 3 )
@@ -166,6 +173,9 @@ shape = SubResource( 4 )
 visible = false
 mesh = SubResource( 5 )
 
+[node name="kugelbot" parent="RigidBodyPlayer" instance=ExtResource( 9 )]
+transform = Transform( -2.99999, 0, 0.00617811, 0, 3, 0, -0.00617811, 0, -2.99999, -2.95361, 3.38322, -3.20658 )
+
 [node name="Position3D" type="Position3D" parent="RigidBodyPlayer"]
 transform = Transform( 1, 0, 0, 0, 0.986689, 0.16262, 0, -0.16262, 0.986689, 0, 4.85271, 16.6565 )
 
@@ -176,13 +186,12 @@ environment = SubResource( 11 )
 transform = Transform( 0.790903, 1.17854e-08, 0.611941, -0.270195, 0.897243, 0.349213, -0.54906, -0.441537, 0.709632, 40.422, 21.4677, 40.7588 )
 
 [node name="Camera" type="InterpolatedCamera" parent="."]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 76.8233, 34.6279, -68.6505 )
-fov = 46.6703
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 73.6484, 36.9114, -29.5782 )
+fov = 73.6995
 target = NodePath("../RigidBodyPlayer/Position3D")
 enabled = true
 
 [node name="Central" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 68.9595, 10.9541, -60.5009 )
 
 [node name="CentralBody" type="StaticBody" parent="Central"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.791977, 0, 0 )
@@ -206,6 +215,12 @@ material/0 = SubResource( 21 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Central/CentralBody"]
 shape = SubResource( 24 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 25 )
+material/0 = SubResource( 26 )
+
+[node name="Spatial" type="Spatial" parent="."]
 
 [connection signal="body_entered" from="StaticBody/Area" to="StaticBody" method="_on_Area_body_entered"]
 [connection signal="body_entered" from="StaticBody/Area" to="RigidBodyPlayer" method="_on_Area_body_entered"]

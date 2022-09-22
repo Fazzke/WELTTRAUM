@@ -6,7 +6,7 @@ onready var planet2 = get_node("/root/Weltraum/StaticBody2")
 onready var planet3 = get_node("/root/Weltraum/StaticBody3")
 var planets = []
 var gravity_direction = Vector3();
-var move_force = 550
+var move_force = 950
 var jump_force = 40
 var current_planet = null
 var can_jump = false
@@ -98,6 +98,12 @@ func _move():
 		
 	if Input.is_action_pressed("ui_down"):
 		rotate_object_local(Vector3.RIGHT, 0.01)
+		
+	if Input.is_action_pressed("ui_rollright"):
+		rotate_object_local(Vector3.FORWARD, 0.01)
+		
+	if Input.is_action_pressed("ui_rollleft"):
+		rotate_object_local(Vector3.BACK, 0.01)
 	
 	#jump:
 	if Input.is_action_pressed("ui_space"):

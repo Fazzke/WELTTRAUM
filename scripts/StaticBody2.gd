@@ -8,7 +8,7 @@ var is_body_inside_area = false
 var on_planet_ground = false
 
 var angle = 0.0
-var speed = 0.001
+var speed = 0.0012
 var central_position = Vector3()
 var self_position = Vector3()
 var distance = 0.0

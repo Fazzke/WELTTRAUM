@@ -1,0 +1,11 @@
+Model Information:
+* title:	OrbBot
+* source:	https://sketchfab.com/3d-models/orbbot-e6c9ac17dda84c62b587ae1b184d9c69
+* author:	Santeri Riikonen (https://sketchfab.com/eKross)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "OrbBot" (https://sketchfab.com/3d-models/orbbot-e6c9ac17dda84c62b587ae1b184d9c69) by Santeri Riikonen (https://sketchfab.com/eKross) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
